@@ -1,0 +1,29 @@
+# Source: sd-core/charts/5g-control-plane/templates/deployment-nssf.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: # kpt-merge: omec/nssf
+  name: nssf
+  namespace: omec
+  labels:
+    release: sd-core
+    app: nssf
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|Role|omec|nssf'
+rules:
+- apiGroups:
+  - ""
+  - extensions
+  - batch
+  - apps
+  verbs:
+  - get
+  - list
+  - patch
+  resources:
+  - statefulsets
+  - daemonsets
+  - jobs
+  - pods
+  - services
+  - endpoints
+  - configmaps
