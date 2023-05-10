@@ -1,0 +1,19 @@
+# Source: sd-core/charts/5g-control-plane/templates/service-amf.yaml
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: /amf-headless
+  name: amf-headless
+  labels:
+    release: sd-core
+    app: amf
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|default|amf-headless'
+spec:
+  selector:
+    release: sd-core
+    app: amf
+  clusterIP: None
+  ports:
+  - name: grpc
+    port: 9000
+    protocol: TCP
