@@ -1,0 +1,19 @@
+# Source: sd-core/charts/5g-control-plane/templates/deployment-nrf.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: # kpt-merge: default/nrf
+  name: nrf
+  namespace: omec
+  labels:
+    release: sd-core
+    app: nrf
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|RoleBinding|default|nrf'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: nrf
+subjects:
+- kind: ServiceAccount
+  name: nrf
+  namespace: omec
