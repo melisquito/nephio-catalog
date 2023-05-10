@@ -8,6 +8,7 @@ metadata: # kpt-merge: /smf
     app: smf
   annotations:
     internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|smf'
+  namespace: omec
 spec:
   replicas: 1
   #serviceName: smf-headless

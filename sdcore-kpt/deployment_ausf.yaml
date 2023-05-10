@@ -8,6 +8,7 @@ metadata: # kpt-merge: /ausf
     app: ausf
   annotations:
     internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|ausf'
+  namespace: omec
 spec:
   replicas: 1
   #serviceName: ausf-headless

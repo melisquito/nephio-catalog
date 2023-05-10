@@ -8,6 +8,7 @@ metadata: # kpt-merge: /simapp
     app: simapp
   annotations:
     internal.kpt.dev/upstream-identifier: '|Service|default|simapp'
+  namespace: omec
 spec:
   type: ClusterIP
   selector:

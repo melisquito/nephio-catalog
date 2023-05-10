@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: default/mongodb
   name: mongodb
-  namespace: default
+  namespace: omec
   labels:
     app.kubernetes.io/name: mongodb
     helm.sh/chart: mongodb-10.31.5
