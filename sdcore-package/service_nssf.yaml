@@ -1,0 +1,20 @@
+# Source: sd-core/charts/5g-control-plane/templates/service-nssf.yaml
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: omec/nssf
+  name: nssf
+  labels:
+    release: sd-core
+    app: nssf
+  namespace: omec
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|omec|nssf'
+spec:
+  type: ClusterIP
+  selector:
+    release: sd-core
+    app: nssf
+  ports:
+  - name: sbi
+    port: 29531
+    protocol: TCP
