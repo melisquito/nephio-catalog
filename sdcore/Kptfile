@@ -8,3 +8,7 @@ info:
   description: sdcore
   keywords:
   - sdcore
+pipeline:
+  mutators:
+  - image: gcr.io/kpt-fn/set-namespace:v0.4.1
+    configPath: set-namespace.yaml
