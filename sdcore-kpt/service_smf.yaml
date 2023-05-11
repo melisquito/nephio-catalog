@@ -1,0 +1,25 @@
+# Source: sd-core/charts/5g-control-plane/templates/service-smf.yaml
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: /smf
+  name: smf
+  labels:
+    release: sd-core
+    app: smf
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|default|smf'
+spec:
+  type: ClusterIP
+  selector:
+    release: sd-core
+    app: smf
+  ports:
+  - name: pfcp
+    port: 8805
+    protocol: UDP
+  - name: prometheus-exporter
+    port: 9089
+    protocol: TCP
+  - name: sbi
+    port: 29502
+    protocol: TCP
