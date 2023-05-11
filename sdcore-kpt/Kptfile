@@ -1,0 +1,26 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata: # kpt-merge: /sdcore-kpt
+  name: sdcore-kpt
+  annotations:
+    config.kubernetes.io/local-config: "true"
+    internal.kpt.dev/upstream-identifier: kpt.dev|Kptfile|default|sdcore-kpt
+upstream:
+  type: git
+  git:
+    repo: https://github.com/melisquito/teste1.git
+    directory: sdcore-kpt
+    ref: sdcore-kpt/v1
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/melisquito/teste1.git
+    directory: sdcore-kpt
+    ref: sdcore-kpt/v1
+    commit: 5605a92b9261dba34fd5b126347b4d764f733e03
+info:
+  description: sdcore-kpt
+pipeline:
+  mutators:
+  - image: gcr.io/kpt-fn/set-namespace:v0.4.1
+    configPath: set-namespace.yaml

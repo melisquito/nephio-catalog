@@ -1,0 +1,20 @@
+# Source: sd-core/charts/5g-control-plane/templates/service-nrf.yaml
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: /nrf
+  name: nrf
+  labels:
+    release: sd-core
+    app: nrf
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|default|nrf'
+  namespace: omec
+spec:
+  type: ClusterIP
+  selector:
+    release: sd-core
+    app: nrf
+  ports:
+  - name: sbi
+    port: 29510
+    protocol: TCP
