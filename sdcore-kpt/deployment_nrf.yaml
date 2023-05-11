@@ -8,6 +8,7 @@ metadata: # kpt-merge: /nrf
     app: nrf
   annotations:
     internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|nrf'
+  namespace: omec
 spec:
   replicas: 1
   #serviceName: nrf-headless

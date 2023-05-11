@@ -8,6 +8,7 @@ metadata: # kpt-merge: /amf
     app: amf
   annotations:
     internal.kpt.dev/upstream-identifier: '|Service|default|amf'
+  namespace: omec
 spec:
   type: ClusterIP
   externalIPs:

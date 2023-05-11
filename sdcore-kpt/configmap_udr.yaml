@@ -8,6 +8,7 @@ metadata: # kpt-merge: /udr
     app: udr
   annotations:
     internal.kpt.dev/upstream-identifier: '|ConfigMap|default|udr'
+  namespace: omec
 data:
   udr-run.sh: |
     #!/bin/sh
