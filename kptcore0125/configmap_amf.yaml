@@ -8,6 +8,7 @@ metadata: # kpt-merge: /amf
     app: amf
   annotations:
     internal.kpt.dev/upstream-identifier: '|ConfigMap|default|amf'
+  namespace: omec
 data:
   amf-run.sh: |
     #!/bin/bash

@@ -8,6 +8,7 @@ metadata: # kpt-merge: /pcf
     app: pcf
   annotations:
     internal.kpt.dev/upstream-identifier: '|ConfigMap|default|pcf'
+  namespace: omec
 data:
   pcf-run.sh: |
     #!/bin/sh

@@ -3,7 +3,7 @@ apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata: # kpt-merge: default/core-net
   name: core-net
-  namespace: default
+  namespace: omec
   annotations:
     internal.kpt.dev/upstream-identifier: 'k8s.cni.cncf.io|NetworkAttachmentDefinition|default|core-net'
 spec:

@@ -8,6 +8,7 @@ metadata: # kpt-merge: /amf
     app: amf
   annotations:
     internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|amf'
+  namespace: omec
 spec:
   replicas: 1
   #serviceName: amf-headless

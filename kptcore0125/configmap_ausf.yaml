@@ -8,6 +8,7 @@ metadata: # kpt-merge: /ausf
     app: ausf
   annotations:
     internal.kpt.dev/upstream-identifier: '|ConfigMap|default|ausf'
+  namespace: omec
 data:
   ausf-run.sh: |
     #!/bin/sh
