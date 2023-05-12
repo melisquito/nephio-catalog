@@ -1,0 +1,29 @@
+# Source: sd-core/charts/omec-sub-provision/templates/deployment-simapp.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: # kpt-merge: default/simapp
+  name: simapp
+  namespace: omec
+  labels:
+    release: sd-core
+    app: simapp
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|Role|default|simapp'
+rules:
+- apiGroups:
+  - ""
+  - extensions
+  - batch
+  - apps
+  verbs:
+  - get
+  - list
+  - patch
+  resources:
+  - statefulsets
+  - daemonsets
+  - jobs
+  - pods
+  - services
+  - endpoints
+  - configmaps
