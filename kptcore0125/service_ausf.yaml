@@ -8,6 +8,7 @@ metadata: # kpt-merge: /ausf
     app: ausf
   annotations:
     internal.kpt.dev/upstream-identifier: '|Service|default|ausf'
+  namespace: omec
 spec:
   type: ClusterIP
   selector:

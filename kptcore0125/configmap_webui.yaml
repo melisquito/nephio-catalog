@@ -8,6 +8,7 @@ metadata: # kpt-merge: /webui
     app: webui
   annotations:
     internal.kpt.dev/upstream-identifier: '|ConfigMap|default|webui'
+  namespace: omec
 data:
   webui-run.sh: |
     #!/bin/sh

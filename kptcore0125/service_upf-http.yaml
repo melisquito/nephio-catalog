@@ -8,6 +8,7 @@ metadata: # kpt-merge: /upf-http
     app: upf
   annotations:
     internal.kpt.dev/upstream-identifier: '|Service|default|upf-http'
+  namespace: omec
 spec:
   type: ClusterIP
   selector:

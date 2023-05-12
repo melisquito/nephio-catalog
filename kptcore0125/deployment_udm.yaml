@@ -8,6 +8,7 @@ metadata: # kpt-merge: /udm
     app: udm
   annotations:
     internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|udm'
+  namespace: omec
 spec:
   replicas: 1
   #serviceName: udm-headless

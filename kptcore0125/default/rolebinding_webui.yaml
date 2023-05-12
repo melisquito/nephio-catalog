@@ -3,7 +3,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata: # kpt-merge: default/webui
   name: webui
-  namespace: default
+  namespace: omec
   labels:
     release: sd-core
     app: webui
@@ -16,4 +16,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: webui
-  namespace: default
+  namespace: omec

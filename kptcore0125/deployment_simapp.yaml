@@ -8,6 +8,7 @@ metadata: # kpt-merge: /simapp
     app: simapp
   annotations:
     internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|simapp'
+  namespace: omec
 spec:
   replicas: 1
   #serviceName: simapp-headless
