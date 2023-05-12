@@ -1,0 +1,20 @@
+# Source: sd-core/charts/5g-control-plane/templates/service-udm.yaml
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: /udm
+  name: udm
+  labels:
+    release: sd-core
+    app: udm
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|default|udm'
+  namespace: omec
+spec:
+  type: ClusterIP
+  selector:
+    release: sd-core
+    app: udm
+  ports:
+  - name: sbi
+    port: 29503
+    protocol: TCP

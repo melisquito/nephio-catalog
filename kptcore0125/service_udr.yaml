@@ -1,0 +1,20 @@
+# Source: sd-core/charts/5g-control-plane/templates/service-udr.yaml
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: /udr
+  name: udr
+  labels:
+    release: sd-core
+    app: udr
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|default|udr'
+  namespace: omec
+spec:
+  type: ClusterIP
+  selector:
+    release: sd-core
+    app: udr
+  ports:
+  - name: sbi
+    port: 29504
+    protocol: TCP
