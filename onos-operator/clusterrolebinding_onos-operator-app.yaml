@@ -1,0 +1,19 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata: # kpt-merge: /onos-operator-app
+  name: onos-operator-app
+  labels:
+    app: onos-operator-app
+    chart: "app-operator-0.5.4"
+    release: "onos-operator"
+    heritage: "Helm"
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|ClusterRoleBinding|default|onos-operator-app'
+subjects:
+- kind: ServiceAccount
+  name: onos-operator-app
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: onos-operator-app
+  apiGroup: rbac.authorization.k8s.io
