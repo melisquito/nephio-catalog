@@ -1,0 +1,19 @@
+# Source: atomix-controller/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: /atomix-controller
+  name: atomix-controller
+  labels:
+    name: atomix-controller
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|default|atomix-controller'
+  namespace: kube-system
+spec:
+  selector:
+    name: atomix-controller
+  ports:
+  - name: control
+    port: 5679
+  - name: webhook
+    port: 443
+    targetPort: 443
