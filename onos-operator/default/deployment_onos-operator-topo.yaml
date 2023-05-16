@@ -1,0 +1,72 @@
+# Source: onos-operator/charts/topo-operator/templates/deployment.yaml
+# SPDX-FileCopyrightText: 2022 2020-present Open Networking Foundation <info@opennetworking.org>
+#
+# SPDX-License-Identifier: Apache-2.0
+apiVersion: apps/v1
+kind: Deployment
+metadata: # kpt-merge: default/onos-operator-topo
+  name: onos-operator-topo
+  namespace: default
+  labels:
+    app: onos-operator-topo
+    chart: "topo-operator-0.5.4"
+    release: "onos-operator"
+    heritage: "Helm"
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|onos-operator-topo'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: onos-operator-topo
+  template:
+    metadata:
+      labels:
+        name: onos-operator-topo
+        release: onos-operator
+        app.kubernetes.io/name: "onos-operator-topo"
+        app.kubernetes.io/version: "v0.5.3"
+        app.kubernetes.io/part-of: "onos-operator"
+        helm.sh/chart: "topo-operator-0.5.4"
+    spec:
+      serviceAccountName: onos-operator-topo
+      containers:
+      - name: controller
+        image: "onosproject/topo-operator:v0.5.3"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 60000
+          name: metrics
+        readinessProbe:
+          exec:
+            command:
+            - stat
+            - /tmp/onos-operator-ready
+          initialDelaySeconds: 4
+          periodSeconds: 10
+          failureThreshold: 1
+        env:
+        - name: CONTROLLER_NAME
+          value: onos-operator-topo
+        - name: CONTROLLER_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: CONTROLLER_SCOPE
+          value: cluster
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        volumeMounts:
+        - name: config
+          mountPath: /etc/onos/config
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: onos-operator-topo-config
