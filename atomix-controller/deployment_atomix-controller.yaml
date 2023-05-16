@@ -5,6 +5,7 @@ metadata: # kpt-merge: /atomix-controller
   name: atomix-controller
   annotations:
     internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|atomix-controller'
+  namespace: kube-system
 spec:
   replicas: 1
   selector:
