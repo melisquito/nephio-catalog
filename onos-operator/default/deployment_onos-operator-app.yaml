@@ -6,7 +6,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: default/onos-operator-app
   name: onos-operator-app
-  namespace: default
+  namespace: kube-system
   labels:
     app: onos-operator-app
     chart: "app-operator-0.5.4"

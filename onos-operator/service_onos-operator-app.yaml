@@ -9,6 +9,7 @@ metadata: # kpt-merge: /onos-operator-app
     heritage: "Helm"
   annotations:
     internal.kpt.dev/upstream-identifier: '|Service|default|onos-operator-app'
+  namespace: kube-system
 spec:
   selector:
     name: onos-operator-app

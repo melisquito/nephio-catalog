@@ -12,7 +12,7 @@ metadata: # kpt-merge: /onos-operator-topo
 subjects:
 - kind: ServiceAccount
   name: onos-operator-topo
-  namespace: default
+  namespace: kube-system
 roleRef:
   kind: ClusterRole
   name: onos-operator-topo

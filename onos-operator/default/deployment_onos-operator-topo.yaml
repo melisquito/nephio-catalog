@@ -6,7 +6,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: default/onos-operator-topo
   name: onos-operator-topo
-  namespace: default
+  namespace: kube-system
   labels:
     app: onos-operator-topo
     chart: "topo-operator-0.5.4"

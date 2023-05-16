@@ -9,6 +9,7 @@ metadata: # kpt-merge: /onos-operator-topo-config
     heritage: "Helm"
   annotations:
     internal.kpt.dev/upstream-identifier: '|ConfigMap|default|onos-operator-topo-config'
+  namespace: kube-system
 data:
   logging.yaml: |-
     loggers:
