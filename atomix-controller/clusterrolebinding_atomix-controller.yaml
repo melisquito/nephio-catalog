@@ -3,6 +3,7 @@ kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata: # kpt-merge: /atomix-controller
   name: atomix-controller
+  namespace: kube-system
   annotations:
     internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|ClusterRoleBinding|default|atomix-controller'
 subjects:

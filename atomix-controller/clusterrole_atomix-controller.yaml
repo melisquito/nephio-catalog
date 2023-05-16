@@ -4,6 +4,7 @@ kind: ClusterRole
 metadata: # kpt-merge: /atomix-controller
   creationTimestamp: null
   name: atomix-controller
+  namespace: kube-system
   annotations:
     internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|ClusterRole|default|atomix-controller'
 rules:
