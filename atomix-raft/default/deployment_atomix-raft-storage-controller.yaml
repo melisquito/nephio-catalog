@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: default/atomix-raft-storage-controller
   name: atomix-raft-storage-controller
-  namespace: default
+  namespace: kube-system
   annotations:
     internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|atomix-raft-storage-controller'
 spec:
