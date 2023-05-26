@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: # kpt-merge: default/sdcore-adapter-v2-1
+  name: sdcore-adapter-v2-1
+  namespace: aether-roc
+  labels:
+    name: sdcore-adapter-v2-1
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|sdcore-adapter-v2-1'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sdcore-adapter-v2-1
+      app.kubernetes.io/instance: aether-roc-umbrella
+  template:
+    metadata:
+      labels:
+        name: sdcore-adapter-v2-1
+        app.kubernetes.io/name: sdcore-adapter-v2-1
+        app.kubernetes.io/instance: aether-roc-umbrella
+    spec:
+      securityContext: null
+      containers:
+      - name: sdcore-adapter-v2-1
+        image: "onosproject/sdcore-adapter:v0.4.4"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        args:
+        - "/usr/local/bin/sdcore-adapter"
+        - "-bind_address=:5150"
+        - "-key=/etc/sdcore-adapter/certs/tls.key"
+        - "-cert=/etc/sdcore-adapter/certs/tls.crt"
+        - "-ca=/etc/sdcore-adapter/certs/tls.cacert"
+        - "-alsologtostderr"
+        - "-hostCheckDisabled"
+        - "-default_target=aiab-enterprise"
+        ports:
+        - name: gnmisecure
+          containerPort: 5150
+        readinessProbe:
+          tcpSocket:
+            port: 5150
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 5150
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        volumeMounts:
+        - name: secret
+          mountPath: /etc/sdcore-adapter/certs
+          readOnly: true
+        - name: logconfig
+          mountPath: /etc/onos/config
+          readOnly: true
+      volumes:
+      - name: logconfig
+        configMap:
+          name: sdcore-adapter-v2-1-logconfig
+      - name: secret
+        secret:
+          secretName: sdcore-adapter-v2-1-secret

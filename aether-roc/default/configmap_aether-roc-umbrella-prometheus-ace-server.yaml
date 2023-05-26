@@ -1,0 +1,44 @@
+# Source: aether-roc-umbrella/charts/prometheus-ace/templates/server/cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata: # kpt-merge: default/aether-roc-umbrella-prometheus-ace-server
+  labels:
+    component: "server"
+    app: prometheus-ace
+    release: aether-roc-umbrella
+    chart: prometheus-ace-14.6.1
+    heritage: Helm
+  name: aether-roc-umbrella-prometheus-ace-server
+  namespace: aether-roc
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|ConfigMap|default|aether-roc-umbrella-prometheus-ace-server'
+data:
+  alerting_rules.yml: |
+    {}
+  alerts: |
+    {}
+  prometheus.yml: |
+    global:
+      evaluation_interval: 1m
+      scrape_interval: 1m
+      scrape_timeout: 10s
+    rule_files:
+    - /etc/config/recording_rules.yml
+    - /etc/config/alerting_rules.yml
+    - /etc/config/rules
+    - /etc/config/alerts
+    scrape_configs:
+    - job_name: aether-mock-exporter
+      scrape_interval: 2s
+      static_configs:
+      - targets:
+        - aether-mock-exporter:2112
+    - job_name: kube-state-metrics
+      scrape_interval: 2s
+      static_configs:
+      - targets:
+        - aether-roc-umbrella-kube-state-metrics:8080
+  recording_rules.yml: |
+    {}
+  rules: |
+    {}

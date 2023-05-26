@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: # kpt-merge: /onos-cli
+  name: onos-cli
+  labels:
+    helm.sh/chart: onos-cli-1.3.2
+    app.kubernetes.io/name: onos-cli
+    app.kubernetes.io/instance: aether-roc-umbrella
+    app.kubernetes.io/version: "v0.9.11"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|onos-cli'
+  namespace: aether-roc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: onos-cli
+      app: onos
+      type: cli
+      resource: onos-cli
+      app.kubernetes.io/name: onos-cli
+      app.kubernetes.io/instance: aether-roc-umbrella
+  template:
+    metadata:
+      labels:
+        name: onos-cli
+        app: onos
+        type: cli
+        resource: onos-cli
+        app.kubernetes.io/name: onos-cli
+        app.kubernetes.io/instance: aether-roc-umbrella
+    spec:
+      securityContext: null
+      containers:
+      - name: onos-cli
+        securityContext: null
+        image: "onosproject/onos-cli:v0.9.11"
+        imagePullPolicy: IfNotPresent
+        stdin: true
+        volumeMounts:
+        - name: config
+          mountPath: /home/onos/config
+        resources: {}
+      volumes:
+      - name: config
+        configMap:
+          name: onos-cli

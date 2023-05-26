@@ -1,0 +1,24 @@
+# Source: aether-roc-umbrella/charts/prometheus-ace/charts/kube-state-metrics/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: default/aether-roc-umbrella-kube-state-metrics
+  name: aether-roc-umbrella-kube-state-metrics
+  namespace: aether-roc
+  labels:
+    app.kubernetes.io/name: kube-state-metrics
+    helm.sh/chart: "kube-state-metrics-3.4.2"
+    app.kubernetes.io/instance: "aether-roc-umbrella"
+    app.kubernetes.io/managed-by: "Helm"
+  annotations:
+    prometheus.io/scrape: 'true'
+    internal.kpt.dev/upstream-identifier: '|Service|default|aether-roc-umbrella-kube-state-metrics'
+spec:
+  type: "ClusterIP"
+  ports:
+  - name: "http"
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/name: kube-state-metrics
+    app.kubernetes.io/instance: aether-roc-umbrella

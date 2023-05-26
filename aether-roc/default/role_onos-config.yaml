@@ -1,0 +1,26 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: # kpt-merge: default/onos-config
+  creationTimestamp: null
+  name: onos-config
+  namespace: aether-roc
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|Role|default|onos-config'
+rules:
+- apiGroups:
+  - primitives.atomix.io
+  resources:
+  - '*'
+  resourceNames:
+  - onos-config-leaderships
+  - onos-config-masterships
+  - onos-config-network-changes
+  - onos-config-device-changes
+  - onos-config-snapshots
+  - onos-config-network-snapshots
+  - onos-config-device-snapshots
+  - onos-config-transactions
+  - onos-config-proposals
+  - onos-config-configurations
+  verbs:
+  - '*'

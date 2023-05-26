@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: # kpt-merge: default/subscriber-proxy
+  name: subscriber-proxy
+  namespace: aether-roc
+  labels:
+    name: subscriber-proxy
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|subscriber-proxy'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: subscriber-proxy
+      app.kubernetes.io/instance: aether-roc-umbrella
+  template:
+    metadata:
+      labels:
+        name: subscriber-proxy
+        app.kubernetes.io/name: subscriber-proxy
+        app.kubernetes.io/instance: aether-roc-umbrella
+    spec:
+      serviceAccountName: subscriber-proxy
+      securityContext: null
+      containers:
+      - name: subscriber-proxy
+        image: "onosproject/subscriber-proxy:v0.3.2"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: OIDC_SERVER_URL
+          value:
+        args:
+        - "/usr/local/bin/subscriber-proxy"
+        - "-bind_port=:5000"
+        - "-client_key=/etc/subscriber-proxy/certs/tls.key"
+        - "-client_crt=/etc/subscriber-proxy/certs/tls.crt"
+        - "-ca_crt=/etc/subscriber-proxy/certs/tls.cacert"
+        - "-alsologtostderr"
+        - "-hostCheckDisabled"
+        - "-webconsole_url=http://aether-roc-umbrella-sdcore-test-dummy:80"
+        - "-onos_config_url=onos-config:5150"
+        ports:
+        - containerPort: 5000
+        readinessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        volumeMounts:
+        - name: secret
+          mountPath: /etc/subscriber-proxy/certs
+          readOnly: true
+        - name: logconfig
+          mountPath: /etc/onos/config
+          readOnly: true
+      volumes:
+      - name: logconfig
+        configMap:
+          name: subscriber-proxy-logconfig
+      - name: secret
+        secret:
+          secretName: subscriber-proxy-secret

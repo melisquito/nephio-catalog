@@ -1,0 +1,32 @@
+# Source: aether-roc-umbrella/charts/aether-roc-gui-v2-1/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: /aether-roc-gui-v2-1-external
+  name: aether-roc-gui-v2-1-external
+  labels:
+    app: aether-roc-gui-v2-1
+    chart: "aether-roc-gui-v2-1-2.1.15"
+    release: "aether-roc-umbrella"
+    heritage: "Helm"
+    helm.sh/chart: aether-roc-gui-v2-1-2.1.15
+    app.kubernetes.io/name: aether-roc-gui-v2-1
+    app.kubernetes.io/instance: aether-roc-umbrella
+    app.kubernetes.io/version: "2.0.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|default|aether-roc-gui-v2-1-external'
+  namespace: aether-roc
+spec:
+  type: NodePort
+  selector:
+    name: aether-roc-gui-v2-1
+    app: aether
+    type: arg
+    resource: aether-roc-gui-v2-1
+    app.kubernetes.io/name: aether-roc-gui-v2-1
+    app.kubernetes.io/instance: aether-roc-umbrella
+  ports:
+  - name: web
+    port: 80
+    nodePort: 31194
+    protocol: TCP
