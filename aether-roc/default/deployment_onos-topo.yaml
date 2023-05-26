@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: # kpt-merge: default/onos-topo
+  name: onos-topo
+  namespace: default
+  labels:
+    helm.sh/chart: onos-topo-1.3.5
+    app.kubernetes.io/name: onos-topo
+    app.kubernetes.io/instance: aether-roc-umbrella
+    app.kubernetes.io/version: "v0.9.6"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|onos-topo'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: onos-topo
+      app: onos
+      type: topo
+      resource: onos-topo
+      app.kubernetes.io/name: onos-topo
+      app.kubernetes.io/instance: aether-roc-umbrella
+  template:
+    metadata:
+      labels:
+        name: onos-topo
+        app: onos
+        type: topo
+        resource: onos-topo
+        app.kubernetes.io/name: onos-topo
+        app.kubernetes.io/instance: aether-roc-umbrella
+      annotations:
+        broker.atomix.io/inject: "true"
+        raft.storage.atomix.io/inject: "true"
+    spec:
+      serviceAccountName: onos-topo
+      securityContext:
+        seccompProfile:
+          type: Unconfined
+      containers:
+      - name: onos-topo
+        image: "onosproject/onos-topo:v0.9.6"
+        imagePullPolicy: IfNotPresent
+        env:
+        # *_NAMESPACE and *_NAME environment variables are recognized by onos-lib-go utilities.
+        # These variables should always be defined.
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: SERVICE_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: OIDC_SERVER_URL
+          value:
+        - name: SERVICE_NAME
+          value: onos-topo
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        args:
+        - "-caPath=/etc/onos/certs/tls.cacrt"
+        - "-keyPath=/etc/onos/certs/tls.key"
+        - "-certPath=/etc/onos/certs/tls.crt"
+        ports:
+        - name: grpc
+          containerPort: 5150
+        startupProbe:
+          tcpSocket:
+            port: 5150
+          periodSeconds: 5
+          failureThreshold: 60
+        readinessProbe:
+          tcpSocket:
+            port: 5150
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 5150
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        volumeMounts:
+        - name: config
+          mountPath: /etc/onos/config
+          readOnly: true
+        - name: secret
+          mountPath: /etc/onos/certs
+          readOnly: true
+        resources: {}
+        # Enable ptrace for debugging
+        securityContext:
+      volumes:
+      - name: config
+        configMap:
+          name: onos-topo-config
+      - name: secret
+        secret:
+          secretName: onos-topo-secret

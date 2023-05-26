@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: /sdcore-adapter-v2-1
+  name: sdcore-adapter-v2-1
+  labels:
+    app: sdcore-adapter-v2-1
+    chart: "sdcore-adapter-v2-1-2.1.3"
+    release: "aether-roc-umbrella"
+    heritage: "Helm"
+    helm.sh/chart: sdcore-adapter-v2-1-2.1.3
+    app.kubernetes.io/name: sdcore-adapter-v2-1
+    app.kubernetes.io/instance: aether-roc-umbrella
+    app.kubernetes.io/version: "v2.1.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|default|sdcore-adapter-v2-1'
+spec:
+  type: ClusterIP
+  selector:
+    name: sdcore-adapter-v2-1
+  ports:
+  - name: gnmisecure
+    port: 5150
+  - name: prometheus
+    port: 9851
+  - name: diag-api
+    port: 8080

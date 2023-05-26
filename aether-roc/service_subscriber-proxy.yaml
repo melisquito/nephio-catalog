@@ -1,0 +1,25 @@
+# Source: aether-roc-umbrella/charts/subscriber-proxy/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: /subscriber-proxy
+  name: subscriber-proxy
+  labels:
+    app: subscriber-proxy
+    chart: "subscriber-proxy-0.2.1"
+    release: "aether-roc-umbrella"
+    heritage: "Helm"
+    helm.sh/chart: subscriber-proxy-0.2.1
+    app.kubernetes.io/name: subscriber-proxy
+    app.kubernetes.io/instance: aether-roc-umbrella
+    app.kubernetes.io/version: "v0.3.2"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|default|subscriber-proxy'
+spec:
+  type: ClusterIP
+  selector:
+    name: subscriber-proxy
+  ports:
+  - name: sub-proxy
+    port: 5000
+    protocol: TCP

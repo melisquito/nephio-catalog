@@ -1,0 +1,62 @@
+# Source: aether-roc-umbrella/charts/prometheus-amp/templates/server/cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata: # kpt-merge: default/aether-roc-umbrella-prometheus-amp-server
+  labels:
+    component: "server"
+    app: prometheus-amp
+    release: aether-roc-umbrella
+    chart: prometheus-amp-14.6.1
+    heritage: Helm
+  name: aether-roc-umbrella-prometheus-amp-server
+  namespace: default
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|ConfigMap|default|aether-roc-umbrella-prometheus-amp-server'
+data:
+  alerting_rules.yml: |
+    {}
+  alerts: |
+    {}
+  prometheus.yml: |
+    global:
+      evaluation_interval: 1m
+      scrape_interval: 1m
+      scrape_timeout: 10s
+    rule_files:
+    - /etc/config/recording_rules.yml
+    - /etc/config/alerting_rules.yml
+    - /etc/config/rules
+    - /etc/config/alerts
+    scrape_configs:
+    - job_name: aether-mock-exporter
+      scrape_interval: 2s
+      static_configs:
+      - targets:
+        - aether-mock-exporter:2112
+    alerting:
+      alertmanagers:
+      - kubernetes_sd_configs:
+          - role: pod
+        tls_config:
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_namespace]
+          regex: default
+          action: keep
+        - source_labels: [__meta_kubernetes_pod_label_app]
+          regex: prometheus-amp
+          action: keep
+        - source_labels: [__meta_kubernetes_pod_label_component]
+          regex: alertmanager
+          action: keep
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_probe]
+          regex: .*
+          action: keep
+        - source_labels: [__meta_kubernetes_pod_container_port_number]
+          regex: "9093"
+          action: keep
+  recording_rules.yml: |
+    {}
+  rules: |
+    {}

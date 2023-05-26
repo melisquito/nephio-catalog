@@ -1,0 +1,10 @@
+apiVersion: primitives.atomix.io/v2beta1
+kind: Election
+metadata: # kpt-merge: default/onos-config-leaderships
+  name: onos-config-leaderships
+  namespace: default
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'primitives.atomix.io|Election|default|onos-config-leaderships'
+spec:
+  store:
+    name: onos-consensus-store

@@ -1,0 +1,25 @@
+# Source: aether-roc-umbrella/templates/topo.yaml
+# The 4G/5G v2.1.0 sdcore-adapter
+apiVersion: topo.onosproject.org/v1beta1
+kind: Entity
+metadata: # kpt-merge: /defaultent
+  name: defaultent
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'topo.onosproject.org|Entity|default|defaultent'
+spec:
+  uri: defaultent
+  kind:
+    name: enterprise
+  aspects:
+    onos.topo.Configurable:
+      address: sdcore-adapter-v2-1:5150
+      version: 2.1.x
+      type: aether
+    onos.topo.Location:
+      lat:
+      lng:
+    onos.topo.TLSOptions:
+      insecure: true
+    onos.topo.Asset:
+      name: Default Enterprise
+    onos.topo.MastershipState: {}

@@ -1,0 +1,24 @@
+# Source: aether-roc-umbrella/charts/prometheus-amp/templates/alertmanager/cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata: # kpt-merge: default/aether-roc-umbrella-prometheus-amp-alertmanager
+  labels:
+    component: "alertmanager"
+    app: prometheus-amp
+    release: aether-roc-umbrella
+    chart: prometheus-amp-14.6.1
+    heritage: Helm
+  name: aether-roc-umbrella-prometheus-amp-alertmanager
+  namespace: default
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|ConfigMap|default|aether-roc-umbrella-prometheus-amp-alertmanager'
+data:
+  alertmanager.yml: |
+    global: {}
+    receivers:
+    - name: default-receiver
+    route:
+      group_interval: 5m
+      group_wait: 10s
+      receiver: default-receiver
+      repeat_interval: 3h

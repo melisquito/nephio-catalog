@@ -1,0 +1,24 @@
+# Source: aether-roc-umbrella/charts/subscriber-proxy/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata: # kpt-merge: /subscriber-proxy-logconfig
+  name: subscriber-proxy-logconfig
+  labels:
+    app: subscriber-proxy
+    chart: "subscriber-proxy-0.2.1"
+    release: "aether-roc-umbrella"
+    heritage: "Helm"
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|ConfigMap|default|subscriber-proxy-logconfig'
+data:
+  logging.yaml: |-
+    loggers:
+      root:
+        level: info
+        output:
+          stdout:
+            sink: stdout
+    sinks:
+      stdout:
+        stdout: {}
+        type: stdout

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: # kpt-merge: default/aether-roc-gui-v2-1
+  name: aether-roc-gui-v2-1
+  namespace: default
+  labels:
+    release: aether-roc-umbrella
+    heritage: Helm
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|ConfigMap|default|aether-roc-gui-v2-1'
+data:
+  server-block.conf: "server {\n    listen 80;\n    ssl_certificate /usr/share/certs/aether-roc-gui.crt;\n    ssl_certificate_key /usr/share/certs/aether-roc-gui.key;\n    location /grafana/ {\n        proxy_pass http://aether-roc-umbrella-grafana:80/;\n        proxy_http_version 1.1;\n        proxy_redirect off;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection \"Upgrade\";\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header Host $http_host;\n        proxy_set_header X-NginX-Proxy true;\n        proxy_hide_header 'X-Frame-Options';\n        add_header X-Frame-Options SAMEORIGIN;\n    }\n    location /prometheus-acc/ {\n        proxy_pass http://prom-label-proxy-acc:8080/;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        add_header X-Frame-Options SAMEORIGIN;\n    }\n    location /prometheus-amp/ {\n        proxy_pass http://prom-label-proxy-amp:8080/;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        add_header X-Frame-Options SAMEORIGIN;\n    }\n    location / {\n      root /usr/share/nginx/html;\n    }\n    location /rs/nav/uiextensions {\n      root /usr/share/nginx/html;\n    }\n    location /kubernetes-api/ {\n        proxy_pass http://localhost:8001/;\n        proxy_http_version 1.1;\n    }\n    location /aether-roc-api/ {\n        proxy_pass http://aether-roc-api:8181/;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection \"Upgrade\";\n        proxy_connect_timeout       3600;\n        proxy_send_timeout          3600;\n        proxy_read_timeout          3600;\n        send_timeout                3600;\n    }\n    \n}"
