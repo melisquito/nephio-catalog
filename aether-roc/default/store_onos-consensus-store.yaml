@@ -6,7 +6,7 @@ apiVersion: atomix.io/v2beta1
 kind: Store
 metadata: # kpt-merge: default/onos-consensus-store
   name: onos-consensus-store
-  namespace: default
+  namespace: aether-roc
   annotations:
     internal.kpt.dev/upstream-identifier: 'atomix.io|Store|default|onos-consensus-store'
 spec:

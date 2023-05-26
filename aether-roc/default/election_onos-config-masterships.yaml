@@ -3,7 +3,7 @@ apiVersion: primitives.atomix.io/v2beta1
 kind: Election
 metadata: # kpt-merge: default/onos-config-masterships
   name: onos-config-masterships
-  namespace: default
+  namespace: aether-roc
   annotations:
     internal.kpt.dev/upstream-identifier: 'primitives.atomix.io|Election|default|onos-config-masterships'
 spec:

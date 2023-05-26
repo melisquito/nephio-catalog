@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: default/aether-mock-exporter
   name: aether-mock-exporter
-  namespace: default
+  namespace: aether-roc
   labels:
     name: aether-mock-exporter
   annotations:

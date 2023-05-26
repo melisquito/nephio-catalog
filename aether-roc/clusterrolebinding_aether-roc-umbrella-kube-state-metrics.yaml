@@ -17,4 +17,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: aether-roc-umbrella-kube-state-metrics
-  namespace: default
+  namespace: aether-roc

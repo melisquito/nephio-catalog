@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata: # kpt-merge: default/onos-cli
   name: onos-cli
-  namespace: default
+  namespace: aether-roc
   annotations:
     internal.kpt.dev/upstream-identifier: '|ConfigMap|default|onos-cli'
 data: {}

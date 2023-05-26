@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: default/onos-config
   name: onos-config
-  namespace: default
+  namespace: aether-roc
   labels:
     helm.sh/chart: onos-config-1.7.8
     app.kubernetes.io/name: onos-config

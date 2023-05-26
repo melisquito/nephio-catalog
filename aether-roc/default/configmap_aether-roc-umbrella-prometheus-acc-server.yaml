@@ -9,7 +9,7 @@ metadata: # kpt-merge: default/aether-roc-umbrella-prometheus-acc-server
     chart: prometheus-acc-14.6.1
     heritage: Helm
   name: aether-roc-umbrella-prometheus-acc-server
-  namespace: default
+  namespace: aether-roc
   annotations:
     internal.kpt.dev/upstream-identifier: '|ConfigMap|default|aether-roc-umbrella-prometheus-acc-server'
 data:

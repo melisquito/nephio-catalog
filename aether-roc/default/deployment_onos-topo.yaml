@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: default/onos-topo
   name: onos-topo
-  namespace: default
+  namespace: aether-roc
   labels:
     helm.sh/chart: onos-topo-1.3.5
     app.kubernetes.io/name: onos-topo

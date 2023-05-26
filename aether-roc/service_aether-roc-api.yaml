@@ -14,6 +14,7 @@ metadata: # kpt-merge: /aether-roc-api
     app.kubernetes.io/managed-by: Helm
   annotations:
     internal.kpt.dev/upstream-identifier: '|Service|default|aether-roc-api'
+  namespace: aether-roc
 spec:
   type: ClusterIP
   selector:

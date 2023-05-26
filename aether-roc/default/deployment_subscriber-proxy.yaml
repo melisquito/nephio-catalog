@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: default/subscriber-proxy
   name: subscriber-proxy
-  namespace: default
+  namespace: aether-roc
   labels:
     name: subscriber-proxy
   annotations:

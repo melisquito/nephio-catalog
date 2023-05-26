@@ -10,6 +10,7 @@ metadata: # kpt-merge: /onos-cli
     app.kubernetes.io/managed-by: Helm
   annotations:
     internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|onos-cli'
+  namespace: aether-roc
 spec:
   replicas: 1
   selector:

@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: default/aether-roc-umbrella-sdcore-test-dummy
   name: aether-roc-umbrella-sdcore-test-dummy
-  namespace: "default"
+  namespace: aether-roc
   labels:
     app.kubernetes.io/name: sdcore-test-dummy
     helm.sh/chart: sdcore-test-dummy-12.0.0

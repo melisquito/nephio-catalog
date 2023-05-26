@@ -12,7 +12,7 @@ metadata: # kpt-merge: default/aether-roc-umbrella-grafana-test
   annotations:
     "helm.sh/hook": test-success
     internal.kpt.dev/upstream-identifier: '|Pod|default|aether-roc-umbrella-grafana-test'
-  namespace: default
+  namespace: aether-roc
 spec:
   serviceAccountName: aether-roc-umbrella-grafana-test
   containers:

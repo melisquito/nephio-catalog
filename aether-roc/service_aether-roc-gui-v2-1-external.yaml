@@ -15,6 +15,7 @@ metadata: # kpt-merge: /aether-roc-gui-v2-1-external
     app.kubernetes.io/managed-by: Helm
   annotations:
     internal.kpt.dev/upstream-identifier: '|Service|default|aether-roc-gui-v2-1-external'
+  namespace: aether-roc
 spec:
   type: NodePort
   selector:

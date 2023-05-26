@@ -9,7 +9,7 @@ metadata: # kpt-merge: default/aether-roc-umbrella-prometheus-amp-server
     chart: prometheus-amp-14.6.1
     heritage: Helm
   name: aether-roc-umbrella-prometheus-amp-server
-  namespace: default
+  namespace: aether-roc
   annotations:
     internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|aether-roc-umbrella-prometheus-amp-server'
 spec:

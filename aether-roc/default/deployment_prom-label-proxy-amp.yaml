@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: default/prom-label-proxy-amp
   name: prom-label-proxy-amp
-  namespace: default
+  namespace: aether-roc
   labels:
     name: prom-label-proxy-amp
   annotations:

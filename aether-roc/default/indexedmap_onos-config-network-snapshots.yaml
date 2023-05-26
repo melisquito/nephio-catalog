@@ -3,7 +3,7 @@ apiVersion: primitives.atomix.io/v2beta1
 kind: IndexedMap
 metadata: # kpt-merge: default/onos-config-network-snapshots
   name: onos-config-network-snapshots
-  namespace: default
+  namespace: aether-roc
   annotations:
     internal.kpt.dev/upstream-identifier: 'primitives.atomix.io|IndexedMap|default|onos-config-network-snapshots'
 spec:
