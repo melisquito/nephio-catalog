@@ -1,9 +1,0 @@
-# A topology kind representing an Aether node
-apiVersion: topo.onosproject.org/v1beta1
-kind: Kind
-metadata: # kpt-merge: /aether
-  name: aether
-  annotations:
-    internal.kpt.dev/upstream-identifier: 'topo.onosproject.org|Kind|default|aether'
-spec:
-  aspects: {}
