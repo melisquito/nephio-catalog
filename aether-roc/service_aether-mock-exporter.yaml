@@ -1,0 +1,30 @@
+# Source: aether-roc-umbrella/charts/aether-mock-exporter/templates/service.yaml
+# SPDX-FileCopyrightText: 2021-present Open Networking Foundation <info@opennetworking.org>
+#
+# SPDX-License-Identifier: Apache-2.0
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: /aether-mock-exporter
+  name: aether-mock-exporter
+  labels:
+    app: aether-mock-exporter
+    chart: "aether-mock-exporter-0.2.1"
+    release: "aether-roc-umbrella"
+    heritage: "Helm"
+    helm.sh/chart: aether-mock-exporter-0.2.1
+    app.kubernetes.io/name: aether-mock-exporter
+    app.kubernetes.io/instance: aether-roc-umbrella
+    app.kubernetes.io/version: "v0.0.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|default|aether-mock-exporter'
+  namespace: aether-roc
+spec:
+  type: ClusterIP
+  selector:
+    name: aether-mock-exporter
+  ports:
+  - name: metrics
+    port: 2112
+  - name: exporterui
+    port: 8081

@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: # kpt-merge: /onos-config-config
+  name: onos-config-config
+  labels:
+    app: onos-config
+    chart: "onos-config-1.7.8"
+    release: "aether-roc-umbrella"
+    heritage: "Helm"
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|ConfigMap|default|onos-config-config'
+  namespace: aether-roc
+data:
+  onos.yaml: ""
+  logging.yaml: |-
+    loggers:
+      atomix/grpc/retry:
+        level: error
+      onos/grpc/retry:
+        level: error
+      root:
+        level: info
+        output:
+          stdout:
+            sink: stdout
+    sinks:
+      stdout:
+        stdout: {}
+        type: stdout

@@ -1,0 +1,11 @@
+# Source: aether-roc-umbrella/charts/onos-config/templates/primitives.yaml
+apiVersion: primitives.atomix.io/v2beta1
+kind: IndexedMap
+metadata: # kpt-merge: default/onos-config-network-changes
+  name: onos-config-network-changes
+  namespace: aether-roc
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'primitives.atomix.io|IndexedMap|default|onos-config-network-changes'
+spec:
+  store:
+    name: onos-consensus-store

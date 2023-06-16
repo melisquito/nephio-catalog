@@ -1,0 +1,21 @@
+# Source: aether-roc-umbrella/charts/prometheus-amp/templates/server/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata: # kpt-merge: /aether-roc-umbrella-prometheus-amp-server
+  labels:
+    component: "server"
+    app: prometheus-amp
+    release: aether-roc-umbrella
+    chart: prometheus-amp-14.6.1
+    heritage: Helm
+  name: aether-roc-umbrella-prometheus-amp-server
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|ClusterRoleBinding|default|aether-roc-umbrella-prometheus-amp-server'
+subjects:
+- kind: ServiceAccount
+  name: aether-roc-umbrella-prometheus-amp-server
+  namespace: aether-roc
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: aether-roc-umbrella-prometheus-amp-server

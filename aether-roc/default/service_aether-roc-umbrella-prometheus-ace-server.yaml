@@ -1,0 +1,26 @@
+# Source: aether-roc-umbrella/charts/prometheus-ace/templates/server/service.yaml
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: default/aether-roc-umbrella-prometheus-ace-server
+  labels:
+    component: "server"
+    app: prometheus-ace
+    release: aether-roc-umbrella
+    chart: prometheus-ace-14.6.1
+    heritage: Helm
+  name: aether-roc-umbrella-prometheus-ace-server
+  namespace: aether-roc
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|default|aether-roc-umbrella-prometheus-ace-server'
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 9090
+  selector:
+    component: "server"
+    app: prometheus-ace
+    release: aether-roc-umbrella
+  sessionAffinity: None
+  type: "ClusterIP"

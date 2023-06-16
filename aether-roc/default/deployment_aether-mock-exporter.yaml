@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: # kpt-merge: default/aether-mock-exporter
+  name: aether-mock-exporter
+  namespace: aether-roc
+  labels:
+    name: aether-mock-exporter
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|aether-mock-exporter'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: aether-mock-exporter
+      app.kubernetes.io/instance: aether-roc-umbrella
+  template:
+    metadata:
+      labels:
+        name: aether-mock-exporter
+        app.kubernetes.io/name: aether-mock-exporter
+        app.kubernetes.io/instance: aether-roc-umbrella
+    spec:
+      securityContext: null
+      containers:
+      - name: aether-mock-exporter
+        image: "onosproject/aether-mock-exporter:v0.4.1"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        args:
+        - "/usr/local/bin/aether-mock-exporter"
+        ports:
+        - name: metrics
+          containerPort: 2112
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 2112
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /metrics
+            port: 2112
+          initialDelaySeconds: 15
+          periodSeconds: 20
+      volumes:
+      - name: secret
+        secret:
+          secretName: aether-mock-exporter-secret
