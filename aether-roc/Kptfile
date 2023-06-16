@@ -4,7 +4,7 @@ metadata: # kpt-merge: /aether-roc
   name: aether-roc
   annotations:
     config.kubernetes.io/local-config: "true"
-    internal.kpt.dev/upstream-identifier: 'kpt.dev|Kptfile|default|aether-roc'
+    internal.kpt.dev/upstream-identifier: kpt.dev|Kptfile|default|aether-roc
 upstream:
   type: git
   git:
@@ -20,3 +20,7 @@ upstreamLock:
     commit: f6a5e59604c82745d275a9a5292adfec34925553
 info:
   description: aether-roc-2.1.29
+pipeline:
+  mutators:
+  - image: gcr.io/kpt-fn/set-namespace:v0.4.1
+    configPath: set-namespace.yaml
