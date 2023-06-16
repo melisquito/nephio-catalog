@@ -1,0 +1,22 @@
+# Source: aether-roc-umbrella/charts/grafana/templates/tests/test-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata: # kpt-merge: default/aether-roc-umbrella-grafana-test
+  name: aether-roc-umbrella-grafana-test
+  namespace: default
+  labels:
+    helm.sh/chart: grafana-6.16.6
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/instance: aether-roc-umbrella
+    app.kubernetes.io/version: "8.1.2"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|ConfigMap|default|aether-roc-umbrella-grafana-test'
+data:
+  run.sh: |-
+    @test "Test Health" {
+      url="http://aether-roc-umbrella-grafana/api/health"
+
+      code=$(wget --server-response --spider --timeout 10 --tries 1 ${url} 2>&1 | awk '/^  HTTP/{print $2}')
+      [ "$code" == "200" ]
+    }

@@ -1,0 +1,11 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata: # kpt-merge: default/aether-roc-gui-v2-1-service-role
+  namespace: default
+  name: aether-roc-gui-v2-1-service-role
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|Role|default|aether-roc-gui-v2-1-service-role'
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["services"]
+  verbs: ["get", "watch", "list"]

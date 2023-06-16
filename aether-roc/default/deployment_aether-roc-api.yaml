@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: # kpt-merge: default/aether-roc-api
+  name: aether-roc-api
+  namespace: default
+  labels:
+    helm.sh/chart: aether-roc-api-1.7.12
+    app.kubernetes.io/name: aether-roc-api
+    app.kubernetes.io/instance: aether-roc-umbrella
+    app.kubernetes.io/version: "v0.10.16"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'apps|Deployment|default|aether-roc-api'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: aether-roc-api
+      app: aether
+      type: api
+      resource: aether-roc-api
+      app.kubernetes.io/name: aether-roc-api
+      app.kubernetes.io/instance: aether-roc-umbrella
+  template:
+    metadata:
+      labels:
+        name: aether-roc-api
+        app: aether
+        type: api
+        resource: aether-roc-api
+        app.kubernetes.io/name: aether-roc-api
+        app.kubernetes.io/instance: aether-roc-umbrella
+    spec:
+      serviceAccountName: aether-roc-api
+      securityContext: null
+      containers:
+      - name: aether-roc-api
+        image: "onosproject/aether-roc-api:v0.10.16"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: OIDC_SERVER_URL
+          value:
+        args:
+        - "-gnmiEndpoint=onos-config:5150"
+        # TODO add support for certificates
+        - "-gnmiTimeout=10s"
+        - "-port=8181"
+        - "-logLevel=info"
+        - "-analyticsEndpoint=http://aether-roc-umbrella-prometheus-acc-server:9090"
+        - -allowCorsOrigin=http://localhost:4200
+        ports:
+        - name: http
+          containerPort: 8181
+        startupProbe:
+          tcpSocket:
+            port: 8181
+          periodSeconds: 5
+          failureThreshold: 60
+        readinessProbe:
+          tcpSocket:
+            port: 8181
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 8181
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        volumeMounts:
+        - name: secret
+          mountPath: /etc/aether-roc-api/certs
+          readOnly: true
+        - name: config
+          mountPath: /etc/onos/config
+          readOnly: true
+        resources: {}
+        # Enable ptrace for debugging
+        securityContext:
+      volumes:
+      - name: secret
+        secret:
+          secretName: aether-roc-api-secret
+      - name: config
+        configMap:
+          name: aether-roc-api-config

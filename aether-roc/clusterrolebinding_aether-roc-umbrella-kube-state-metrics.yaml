@@ -1,0 +1,20 @@
+# Source: aether-roc-umbrella/charts/prometheus-ace/charts/kube-state-metrics/templates/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata: # kpt-merge: /aether-roc-umbrella-kube-state-metrics
+  labels:
+    app.kubernetes.io/name: kube-state-metrics
+    helm.sh/chart: kube-state-metrics-3.4.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: aether-roc-umbrella
+  name: aether-roc-umbrella-kube-state-metrics
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|ClusterRoleBinding|default|aether-roc-umbrella-kube-state-metrics'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: aether-roc-umbrella-kube-state-metrics
+subjects:
+- kind: ServiceAccount
+  name: aether-roc-umbrella-kube-state-metrics
+  namespace: default

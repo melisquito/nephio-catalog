@@ -1,0 +1,24 @@
+# Source: aether-roc-umbrella/charts/grafana/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata: # kpt-merge: default/aether-roc-umbrella-grafana
+  name: aether-roc-umbrella-grafana
+  namespace: default
+  labels:
+    helm.sh/chart: grafana-6.16.6
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/instance: aether-roc-umbrella
+    app.kubernetes.io/version: "8.1.2"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|Service|default|aether-roc-umbrella-grafana'
+spec:
+  type: ClusterIP
+  ports:
+  - name: service
+    port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/instance: aether-roc-umbrella
