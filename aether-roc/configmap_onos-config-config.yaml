@@ -9,6 +9,7 @@ metadata: # kpt-merge: /onos-config-config
     heritage: "Helm"
   annotations:
     internal.kpt.dev/upstream-identifier: '|ConfigMap|default|onos-config-config'
+  namespace: aether-roc
 data:
   onos.yaml: ""
   logging.yaml: |-

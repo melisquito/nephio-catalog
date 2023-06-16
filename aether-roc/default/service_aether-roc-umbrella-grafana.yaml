@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata: # kpt-merge: default/aether-roc-umbrella-grafana
   name: aether-roc-umbrella-grafana
-  namespace: default
+  namespace: aether-roc
   labels:
     helm.sh/chart: grafana-6.16.6
     app.kubernetes.io/name: grafana

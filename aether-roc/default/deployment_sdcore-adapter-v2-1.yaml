@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: default/sdcore-adapter-v2-1
   name: sdcore-adapter-v2-1
-  namespace: default
+  namespace: aether-roc
   labels:
     name: sdcore-adapter-v2-1
   annotations:

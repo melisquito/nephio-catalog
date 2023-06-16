@@ -8,4 +8,5 @@ metadata: # kpt-merge: /aether-roc-umbrella-grafana-post-install
     heritage: "Helm"
   annotations:
     internal.kpt.dev/upstream-identifier: '|ConfigMap|default|aether-roc-umbrella-grafana-post-install'
+  namespace: aether-roc
 data: {}

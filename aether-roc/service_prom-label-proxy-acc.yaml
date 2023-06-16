@@ -15,6 +15,7 @@ metadata: # kpt-merge: /prom-label-proxy-acc
     app.kubernetes.io/managed-by: Helm
   annotations:
     internal.kpt.dev/upstream-identifier: '|Service|default|prom-label-proxy-acc'
+  namespace: aether-roc
 spec:
   type: ClusterIP
   selector:

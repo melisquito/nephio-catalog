@@ -14,7 +14,7 @@ metadata: # kpt-merge: /aether-roc-umbrella-grafana-clusterrolebinding
 subjects:
 - kind: ServiceAccount
   name: aether-roc-umbrella-grafana
-  namespace: default
+  namespace: aether-roc
 roleRef:
   kind: ClusterRole
   name: aether-roc-umbrella-grafana-clusterrole

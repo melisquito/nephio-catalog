@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata: # kpt-merge: default/aether-roc-umbrella-dashboards-templated
   name: aether-roc-umbrella-dashboards-templated
-  namespace: default
+  namespace: aether-roc
   labels:
     grafana_dashboard: "aether-roc-gui"
   annotations:

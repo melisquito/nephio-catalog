@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata: # kpt-merge: default/aether-roc-umbrella-datasources-templated
   name: aether-roc-umbrella-datasources-templated
-  namespace: default
+  namespace: aether-roc
   labels:
     grafana_datasource: "aether-roc-gui"
   annotations:

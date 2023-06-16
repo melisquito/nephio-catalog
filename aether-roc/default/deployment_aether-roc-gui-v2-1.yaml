@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: # kpt-merge: default/aether-roc-gui-v2-1
   name: aether-roc-gui-v2-1
-  namespace: default
+  namespace: aether-roc
   labels:
     helm.sh/chart: aether-roc-gui-v2-1-2.1.15
     app.kubernetes.io/name: aether-roc-gui-v2-1

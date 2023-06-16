@@ -9,7 +9,7 @@ metadata: # kpt-merge: default/aether-roc-umbrella-prometheus-amp-alertmanager
     chart: prometheus-amp-14.6.1
     heritage: Helm
   name: aether-roc-umbrella-prometheus-amp-alertmanager
-  namespace: default
+  namespace: aether-roc
   annotations:
     internal.kpt.dev/upstream-identifier: '|Service|default|aether-roc-umbrella-prometheus-amp-alertmanager'
 spec:

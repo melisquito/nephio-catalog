@@ -9,6 +9,7 @@ metadata: # kpt-merge: /sdcore-adapter-v2-1-logconfig
     heritage: "Helm"
   annotations:
     internal.kpt.dev/upstream-identifier: '|ConfigMap|default|sdcore-adapter-v2-1-logconfig'
+  namespace: aether-roc
 data:
   logging.yaml: |-
     loggers:

@@ -3,7 +3,7 @@ apiVersion: primitives.atomix.io/v2beta1
 kind: Map
 metadata: # kpt-merge: default/onos-config-device-snapshots
   name: onos-config-device-snapshots
-  namespace: default
+  namespace: aether-roc
   annotations:
     internal.kpt.dev/upstream-identifier: 'primitives.atomix.io|Map|default|onos-config-device-snapshots'
 spec:

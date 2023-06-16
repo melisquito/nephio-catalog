@@ -15,6 +15,7 @@ metadata: # kpt-merge: /subscriber-proxy
     app.kubernetes.io/managed-by: Helm
   annotations:
     internal.kpt.dev/upstream-identifier: '|Service|default|subscriber-proxy'
+  namespace: aether-roc
 spec:
   type: ClusterIP
   selector:

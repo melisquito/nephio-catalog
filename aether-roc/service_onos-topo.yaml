@@ -14,6 +14,7 @@ metadata: # kpt-merge: /onos-topo
     app.kubernetes.io/managed-by: Helm
   annotations:
     internal.kpt.dev/upstream-identifier: '|Service|default|onos-topo'
+  namespace: aether-roc
 spec:
   type: ClusterIP
   selector:

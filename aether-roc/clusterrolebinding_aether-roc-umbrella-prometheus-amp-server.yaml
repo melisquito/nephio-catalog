@@ -14,7 +14,7 @@ metadata: # kpt-merge: /aether-roc-umbrella-prometheus-amp-server
 subjects:
 - kind: ServiceAccount
   name: aether-roc-umbrella-prometheus-amp-server
-  namespace: default
+  namespace: aether-roc
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
